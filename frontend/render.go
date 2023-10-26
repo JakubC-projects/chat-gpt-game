@@ -50,7 +50,7 @@ func getSanitizedPrompt(lvl int) string {
 	return strings.ReplaceAll(
 		levelData.SystemPrompt,
 		levelData.Password,
-		strings.Repeat("*", len(levelData.Password)))
+		strings.Repeat("█", len(levelData.Password)))
 }
 
 func getNextLevel(lvl, maxLvl int) string {

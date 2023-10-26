@@ -1,44 +1,46 @@
 <html>
 
 <body>
-    <h1> Charisma Challenge</h1>
+    <div style="width: 500px; max-width: 100%;">
+        <h1> Charisma Challenge</h1>
 
-    <h2>Total Score: {{.TotalScore}}</h2>
+        <h2>Total Score: {{.TotalScore}}</h2>
 
-    <form action="/reset" method="post">
-    <input type="submit" value="Reset progress"/>
-    </form>
+        <form action="/reset" method="post">
+        <input type="submit" value="Reset progress"/>
+        </form>
 
-    {{range $i, $lvl := .Levels}}
-        <a
-            {{if $lvl.Available}}href="/{{$i}}"{{end}}
-        >{{$lvl.Name}}</a>
-    {{end}}
+        {{range $i, $lvl := .Levels}}
+            <a
+                {{if $lvl.Available}}href="/{{$i}}"{{end}}
+            >{{$lvl.Name}}</a>
+        {{end}}
 
-    <h3>Level {{.OpenLevel}}</h3>
+        <h3>Level {{.OpenLevel}}</h3>
 
-    <h4>Level Score: {{.LevelScore}}<h4>
+        <h4>Level Score: {{.LevelScore}}<h4>
 
-    <h4>System prompt</h4>
-    <p>{{.SanitizedSystemPrompt}}</p>
-    
-    <h4>Your prompt</h4>
-    <form method="post">
-        <textarea style="width: 500px; height: 100px" name="prompt">{{.UserPrompt}}</textarea>
+        <h4>System prompt</h4>
+        <p style="border: 1px solid black; padding: 4px; border-radius: 4px">{{.SanitizedSystemPrompt}}</p>
+        
+        <h4>Your prompt</h4>
+        <form method="post">
+            <textarea style="width: 100%; height: 100px" name="prompt">{{.UserPrompt}}</textarea>
+            <br>
+            <br>
+            <input type="submit" />
+        </form>
+        
+        {{if ne .GptAnswer ""}}
+        <h4>Answer</h4>
+        {{.GptAnswer}}
+        </body>
+        {{end}}
+
         <br>
         <br>
-        <input type="submit" />
-    </form>
-    
-    {{if ne .GptAnswer ""}}
-    <h4>Answer</h4>
-    {{.GptAnswer}}
-    </body>
-    {{end}}
-
-    <br>
-    <br>
-    {{if ne .NextLevel ""}}
-    <a href="{{.NextLevel}}">Next Level</a>
-    {{end}}
+        {{if ne .NextLevel ""}}
+        <a href="{{.NextLevel}}">Next Level</a>
+        {{end}}
+    </div>
 </html>

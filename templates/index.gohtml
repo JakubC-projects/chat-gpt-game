@@ -1,0 +1,44 @@
+<html>
+
+<body>
+    <h1> Charisma Challenge</h1>
+
+    <h2>Total Score: {{.TotalScore}}</h2>
+
+    <form action="/reset" method="post">
+    <input type="submit" value="Reset progress"/>
+    </form>
+
+    {{range $i, $lvl := .Levels}}
+        <a
+            {{if $lvl.Available}}href="/{{$i}}"{{end}}
+        >{{$lvl.Name}}</a>
+    {{end}}
+
+    <h3>Level {{.OpenLevel}}</h3>
+
+    <h4>Level Score: {{.LevelScore}}<h4>
+
+    <h4>System prompt</h4>
+    <p>{{.SanitizedSystemPrompt}}</p>
+    
+    <h4>Your prompt</h4>
+    <form method="post">
+        <textarea style="width: 500px; height: 100px" name="prompt">{{.UserPrompt}}</textarea>
+        <br>
+        <br>
+        <input type="submit" />
+    </form>
+    
+    {{if ne .GptAnswer ""}}
+    <h4>Answer</h4>
+    {{.GptAnswer}}
+    </body>
+    {{end}}
+
+    <br>
+    <br>
+    {{if ne .NextLevel ""}}
+    <a href="{{.NextLevel}}">Next Level</a>
+    {{end}}
+</html>

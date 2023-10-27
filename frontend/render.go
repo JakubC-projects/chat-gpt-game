@@ -38,7 +38,7 @@ func getTmplLevels(maxLvl int) []templateLevel {
 	res := make([]templateLevel, len(game.Levels))
 
 	for i := 0; i < len(game.Levels); i++ {
-		res[i].Name = fmt.Sprintf("Level %d", i)
+		res[i].Name = fmt.Sprintf("Poziom %d", i)
 		res[i].Available = i <= maxLvl
 	}
 	return res
